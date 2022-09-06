@@ -11,9 +11,19 @@ jobs:
           docker run -p 8080:8080 -d numamaurin14/samplejs
           sleep 2
           curl -I localhost:8080 | grep "200 OK"
-  
+  publish:
+    machine:
+      image: ubuntu-2004:202107-02
+    steps:
+      - checkout
+      - run: |
+          docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
+          docker build . -t $DOCKER_LOGIN/node-web-app
+          docker image push $DOCKER_LOGIN/node-web-app
 workflows:
   dams-executor:
     jobs:
       - build
-      
+      - publish:
+          requires:
+            - build
