@@ -7,8 +7,8 @@ jobs:
     steps:
       - checkout
       - run: |
-          docker build . -t numamaurin14/samplejs
-          docker run -p 8080:8080 -d numamaurin14/samplejs
+          docker build . -t $DOCKER_LOGIN/samplejs
+          docker run -p 8080:8080 -d $DOCKER_LOGIN/samplejs
           sleep 2
           curl -I localhost:8080 | grep "200 OK"
   publish:
@@ -18,8 +18,8 @@ jobs:
       - checkout
       - run: |
           docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
-          docker build . -t $DOCKER_LOGIN/node-web-app
-          docker image push $DOCKER_LOGIN/node-web-app
+          docker build . -t $DOCKER_LOGIN/samplejs
+          docker image push $DOCKER_LOGIN/samplejs
 workflows:
   dams-executor:
     jobs:
