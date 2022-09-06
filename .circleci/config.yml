@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   build:
     machine:
-      image: 6d80a3b11826
+      image: ubuntu-2004:202107-02
     steps:
       - checkout
       - run: |
@@ -13,7 +13,7 @@ jobs:
           curl -I localhost:8080 | grep "200 OK"
   publish:
     machine:
-      image: 6d80a3b11826
+      image: ubuntu-2004:202107-02
     steps:
       - checkout
       - run: |
