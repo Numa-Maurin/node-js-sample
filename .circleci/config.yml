@@ -24,6 +24,4 @@ workflows:
   gogo:
     jobs:
       - build
-      - publish:
-          requires:
-            - build
+     
